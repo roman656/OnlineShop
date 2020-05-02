@@ -1,2 +1,3 @@
 # OnlineShop
-OnlineShop on php (test)
+Ссылка на сайт:
+http://karelia.mati.su/PHP_LABS/
