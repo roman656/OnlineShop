@@ -1,0 +1,321 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22pt;
+    background-color: rgb(41, 41, 41);
+    color: #333;
+    height: 100%;
+    text-align: center;
+}
+
+header {
+    background-color: rgb(41, 41, 41);
+    color: white;
+    border-bottom: 5px solid rgb(107, 107, 107);
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 15px;
+}
+
+.OwnerAndVersion {
+    float: left;
+    width: 50%;
+    font-size: 24pt;
+    text-align: left;
+}
+
+.ShopName {
+    float: left;
+    width: 50%;
+    text-align: right;
+    font-size: 45pt;
+}
+
+.MainPanel {
+    background-color: rgb(41, 41, 41);
+    color: white;
+    border-bottom: 5px solid rgb(107, 107, 107);
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.CartAndGoods {
+    float: left;
+    width: 15%;
+    text-align: center;
+    border-right: 5px solid rgb(107, 107, 107);
+}
+
+.CartAndGoods input {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.CartAndGoods input:hover {
+    background-color: rgb(53, 126, 56); 
+}
+
+.ShopInfo {
+    float: right;
+    text-align: center;
+    font-size: 30pt;
+    padding-top: 45px;
+    padding-right: 15px;
+}
+
+
+
+/*---Список-товаров-начало---*/
+
+.Product {
+    border: 5px solid rgb(94, 94, 94);
+    background-color: rgb(121, 121, 121);
+    width: 350px;
+    height: 430px;
+    margin: 30px;
+    color: white;
+    display: inline-block;
+}
+
+.ProductName {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.ProductPrice {
+    font-size: 18pt;
+}
+
+.ProductAmount {
+    font-size: 18pt;
+    margin: none;
+} 
+
+.ProductAmount input {
+    padding: 6px 10px !important;
+} 
+
+.ProductAmount input:hover {
+    background-color: #4CAF50 !important; 
+}
+
+.Product input {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.Product input:hover {
+    background-color: rgb(53, 126, 56);
+}
+
+.ProductImage {
+    width: 320px;
+    height: 220px;
+    border: 3px solid rgb(46, 46, 46);
+}
+
+.AddToCartButton {
+    margin: 0px;
+    padding: 0px;
+}
+
+/*---Список-товаров-конец---*/
+
+
+
+/*---Корзина-начало---*/
+
+.EmptyCart {
+    height: 300px !important;
+    text-align: center;
+    color: white;
+    font-size: 38pt;
+}
+
+.EmptyCart p {
+    padding-top: 120px;
+}
+
+.ProductInCart input {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+}
+
+.ProductInCart form {
+    display: inline;
+}
+
+.BuyButton {
+    display: block;
+    margin-top: 15px;
+    margin-right: 8px;
+    background-color: rgb(151, 167, 7) !important;    
+}
+
+.BuyButton:hover {
+    background-color: rgb(113, 124, 10) !important;
+}
+
+.RemoveProductFromCartButton {
+    display: block;
+    margin-top: 15px;
+}
+
+.ProductInCart input:hover {
+    background-color: rgb(53, 126, 56);
+}
+
+.UpdateProductAmountInCartButton input:last-of-type:hover {
+    background-color: #4CAF50;
+}
+
+.UpdateProductAmountInCartButton input {
+    padding: 15px 12px;
+    margin: 0px;
+}
+
+.ProductInCart .ProductName {
+    font-size: 22pt;
+}
+
+.ProductAmountInCart {
+    font-size: 18pt;
+    margin: 8px 0px;
+}
+
+.ProductPriceInCart {
+    font-size: 18pt;
+    margin: 10px 0px;;
+}
+
+.buyThank {
+    height: 300px !important;
+    text-align: center;
+    color: white;
+    font-size: 45pt;
+    padding-top: 150px;
+}
+
+.ProductInCart {
+    border: 5px solid rgb(94, 94, 94);
+    background-color: rgb(121, 121, 121);
+    width: 350px;
+    height: 510px;
+    margin: 30px;
+    color: white;
+    display: inline-block;
+    font-size: 18pt;
+}
+
+.TotalPriceInCart {
+    color: white;
+    border-top: 5px solid rgb(107, 107, 107);
+    text-align: left;
+    font-size: 22pt;
+    height: 60px;
+    display: block;
+}
+
+.TotalPriceInCart p {
+    padding-left: 30px;
+    padding-top: 15px;
+    height: 45px;
+    display: inline-block;
+}
+
+.TotalPriceInCart form {
+    display: inline;
+}
+
+.TotalPriceInCart input {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
+    margin-top: 4px;
+    margin-right: 30px;
+    float: right;
+}
+
+.TotalPriceInCart input:first-of-type {
+    background-color: rgb(151, 167, 7);
+}
+
+.TotalPriceInCart input:hover {
+    background-color: rgb(53, 126, 56);
+}
+
+.TotalPriceInCart input:first-of-type:hover {
+    background-color: rgb(113, 124, 10);
+}
+
+/*---Корзина-конец---*/
+
+
+
+/*---Подвал-начало---*/
+
+footer {
+    height: 150px;
+    width: 100%;
+    font-size: 20pt;
+    background-color: rgb(41, 41, 41);
+    color: white;
+    border-top: 5px solid rgb(107, 107, 107);
+    text-align: left;
+}
+
+footer a {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    margin: 10px;
+}
+
+footer a:hover {
+    background-color: rgb(53, 126, 56); 
+}
+
+.Copyright {
+    margin: 10px 15px 10px 15px;
+}
+
+.Contacts {
+    width: 100%;
+}
+
+.Contacts td {
+    padding: 4px;
+    width: 20%;
+}
+
+/*---Подвал-конец---*/
