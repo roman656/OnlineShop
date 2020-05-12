@@ -64,13 +64,93 @@ header {
 }
 
 .ShopInfo {
-    float: right;
     text-align: center;
+    float: left;
     font-size: 30pt;
     padding-top: 45px;
-    padding-right: 15px;
+    width: 65%;
 }
 
+.Registration {
+    border-left: 5px solid rgb(107, 107, 107);
+    float: right;
+    width: 15%;
+}
+
+.Registration input {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.Registration input:hover {
+    background-color: rgb(53, 126, 56); 
+}
+
+.Login {
+    border: 5px solid rgb(94, 94, 94);
+    background-color: rgb(121, 121, 121);
+    width: 400px;
+    height: 450px;
+    margin: 30px;
+    color: white;
+    display: inline-block;
+}
+
+.Login p:first-of-type {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 34pt;
+}
+
+.Username {
+    font-size: 22pt !important; 
+}
+
+.Password {
+    font-size: 22pt !important;
+}
+
+.Login input {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.Login input:hover {
+    background-color: rgb(53, 126, 56); 
+}
+
+.Login input:last-of-type {
+    background-color: rgb(151, 167, 7) !important;
+}
+
+.Login input:last-of-type:hover {
+    background-color: rgb(113, 124, 10) !important;
+}
+
+.UserInPanel {
+    font-size: 28px;
+    padding-bottom: 16px;
+}
+
+.loginError {
+    color: rgb(221, 45, 45);
+    padding: 15px 20px;
+    font-size: 22px;
+}
 
 
 /*---Список-товаров-начало---*/

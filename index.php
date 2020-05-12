@@ -136,7 +136,7 @@
             ';
         }
 
-        public function printMainPanel() {
+        public function printMainPanel($username) {
             echo '
                     <div class = "MainPanel">
                         <div class = "CartAndGoods">
@@ -145,10 +145,28 @@
                                 <p><input type = "submit" name = "showShoppingCart" value = "Моя корзина"></p>
                             </form>
                         </div>
-                        <div class = "Registration">
-                        </div>
                         <div class = "ShopInfo">
                             <p>Добро пожаловать в наш магазин!</p>
+                        </div>
+                        <div class = "Registration">
+            ';
+            if ($username == "") {
+                echo '
+                            <form method = "POST">
+                                <p><input type = "submit" name = "registration" value = "Регистрация"></p>
+                                <p><input type = "submit" name = "login" value = "Вход"></p>
+                            </form>
+                ';
+            }
+            else {
+                echo '
+                            <p class = "UserInPanel">Вы вошли как:<br>'.$username.'</p>
+                            <form method = "POST">
+                                <p><input type = "submit" name = "exit" value = "Выйти"></p>
+                            </form>
+                ';
+            }
+            echo '
                         </div>
                     </div>
             ';
@@ -277,6 +295,23 @@
             ';
         }
 
+        public function showLogin() {
+            echo '
+                    <div class = "Login">
+                        <p>Вход</p>
+                        <form method = "POST">
+                            <p class = "Username">Имя пользователя</p>
+                            <input type = "text" maxlength = "20" size = "20" name = "username" placeholder = "Логин">
+                            <p class = "Password">Пароль</p>
+                            <input type = "password" name = "password" placeholder = "Пароль">
+                            <input type = "submit" name = "toMain" value = "На главную">
+                            <input type = "reset" value = "Очистить форму">
+                            <input type = "submit" name = "loginButtonPressed" value = "Войти">
+                        </form>
+                    </div>
+            ';
+        }
+
         public function addProductToCart($productId, $amount, $time) {
             if (($this->products[$productId])->getAmount() > 0) {
                 if (isset($_COOKIE[$productId])) {
@@ -331,60 +366,108 @@
         3 => new Product('Объект 279', 1400000000, 1, 'Images/Obj_279.jpg', 'Единственный экземпляр уникального танка Объект 279 сегодня экспонируется в Бронетанковом музее в Кубинке.')
     );
 
+    /* Пароль: 1234567890Ab */
+    $users = array(1 => array('login' => 'admin', 'password' => 'c0d7659e35f9e7b793c4257d565e7390'));
+
     $magazin4ik = new OnlineShop('Magazin4ik', 'Admin', '0.0.0.2', $products);
+
+    session_start();
 
     $magazin4ik->printHead();
     $magazin4ik->printHeader();
-    $magazin4ik->printMainPanel();
 
-    if (isset($_POST['addToCart'])) {
-        $magazin4ik->addProductToCart($_POST['id'], $_POST['amount'], 3600);
+    if (isset($_POST['login'])) {
+        $magazin4ik->showLogin();
+    }
+    elseif (isset($_POST['exit'])){
+        unset($_SESSION['username']);
+        session_destroy();
+        $magazin4ik->printMainPanel("");
         $magazin4ik->showGoodsList();
     }
-    elseif (isset($_POST['removeProductFromCart'])) {
-        $magazin4ik->removeProductFromCart($_POST['id'], true, -1, -1);
-        setcookie("removeRedirect", 1, time() + 60);
-        header('Location: '.$_SERVER["HTTP_REFERER"]);
-    }
-    elseif (isset($_POST['updateProductAmountInCart'])) {
-        $magazin4ik->updateProductInCart($_POST['id'], $_POST['amount'], 3600);
-        setcookie("removeRedirect", 1, time() + 60);
-        header('Location: '.$_SERVER["HTTP_REFERER"]);
-    }
-    elseif (isset($_POST['showShoppingCart'])) {
-        $magazin4ik->showShoppingCart();
-    }
-    elseif (isset($_POST['showGoodsList'])) {
-        $magazin4ik->showGoodsList();
-    }
-    elseif (isset($_POST['buyAllInCart'])) {
-        $magazin4ik->cleanCart();
-        setcookie("buyRedirect", 1, time() + 60);
-        header('Location: '.$_SERVER["HTTP_REFERER"]);
-    }
-    elseif (isset($_POST['buy'])) {
-        $magazin4ik->removeProductFromCart($_POST['id'], true, -1, -1);
-        setcookie("buyRedirect", 1, time() + 60);
-        header('Location: '.$_SERVER["HTTP_REFERER"]);
-    }
-    elseif (isset($_POST['cleanCart'])) {
-        $magazin4ik->cleanCart();
-        setcookie("removeRedirect", 1, time() + 60);
-        header('Location: '.$_SERVER["HTTP_REFERER"]);
+    elseif (isset($_POST['loginButtonPressed'])) {
+        $hasCorrectLogin = false;
+        foreach($users as $key => $value) {
+            if ($value['login'] == $_POST['username']) {
+                $hasCorrectLogin = true;
+                if ($value['password'] == md5($_POST['password'])) {
+                    $_SESSION['username'] = htmlspecialchars($_POST['username']);
+                    $magazin4ik->printMainPanel($_SESSION['username']);
+                    $magazin4ik->showGoodsList();
+                }
+                else {
+                    echo '
+                        <p class = "loginError">Неверный пароль!</p>
+                    ';
+                    $magazin4ik->showLogin();
+                    break;
+                }    
+            }
+        }
+        if (!isset($_SESSION['username']) && !$hasCorrectLogin) {
+            echo '
+                <p class = "loginError">Неверное имя пользователя!</p>
+            ';
+            $magazin4ik->showLogin();
+        }
     }
     else {
-        if (isset($_COOKIE["removeRedirect"])) {
-            setcookie("removeRedirect", 0, time() - 60);
-            $magazin4ik->showShoppingCart();
-        }
-        elseif (isset($_COOKIE["buyRedirect"])) {
-            setcookie("buyRedirect", 0, time() - 60);
-            echo '
-                    <p class = "buyThank">Спасибо!</p>
-            ';
+        if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+            $magazin4ik->printMainPanel($_SESSION['username']);
         }
         else {
+            $magazin4ik->printMainPanel("");
+        }
+
+        if (isset($_POST['addToCart'])) {
+            $magazin4ik->addProductToCart($_POST['id'], $_POST['amount'], 3600);
             $magazin4ik->showGoodsList();
+        }
+        elseif (isset($_POST['removeProductFromCart'])) {
+            $magazin4ik->removeProductFromCart($_POST['id'], true, -1, -1);
+            setcookie("removeRedirect", 1, time() + 60);
+            header('Location: '.$_SERVER["HTTP_REFERER"]);
+        }
+        elseif (isset($_POST['updateProductAmountInCart'])) {
+            $magazin4ik->updateProductInCart($_POST['id'], $_POST['amount'], 3600);
+            setcookie("removeRedirect", 1, time() + 60);
+            header('Location: '.$_SERVER["HTTP_REFERER"]);
+        }
+        elseif (isset($_POST['showShoppingCart'])) {
+            $magazin4ik->showShoppingCart();
+        }
+        elseif (isset($_POST['showGoodsList'])) {
+            $magazin4ik->showGoodsList();
+        }
+        elseif (isset($_POST['buyAllInCart'])) {
+            $magazin4ik->cleanCart();
+            setcookie("buyRedirect", 1, time() + 60);
+            header('Location: '.$_SERVER["HTTP_REFERER"]);
+        }
+        elseif (isset($_POST['buy'])) {
+            $magazin4ik->removeProductFromCart($_POST['id'], true, -1, -1);
+            setcookie("buyRedirect", 1, time() + 60);
+            header('Location: '.$_SERVER["HTTP_REFERER"]);
+        }
+        elseif (isset($_POST['cleanCart'])) {
+            $magazin4ik->cleanCart();
+            setcookie("removeRedirect", 1, time() + 60);
+            header('Location: '.$_SERVER["HTTP_REFERER"]);
+        }
+        else {
+            if (isset($_COOKIE["removeRedirect"])) {
+                setcookie("removeRedirect", 0, time() - 60);
+                $magazin4ik->showShoppingCart();
+            }
+            elseif (isset($_COOKIE["buyRedirect"])) {
+                setcookie("buyRedirect", 0, time() - 60);
+                echo '
+                        <p class = "buyThank">Спасибо!</p>
+                ';
+            }
+            else {
+                $magazin4ik->showGoodsList();
+            }
         }
     }
 
