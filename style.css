@@ -152,7 +152,150 @@ header {
     font-size: 22px;
 }
 
+.NewUser {
+    border: 5px solid rgb(94, 94, 94);
+    background-color: rgb(121, 121, 121);
+    width: 400px;
+    height: 1200px;
+    margin: 30px;
+    color: white;
+    display: inline-block;
+}
 
+.NewUser p:first-of-type {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 28pt;
+}
+
+.NewUser input {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.NewUser input:hover {
+    background-color: rgb(53, 126, 56); 
+}
+
+.NewUser input:last-of-type {
+    background-color: rgb(151, 167, 7) !important;
+}
+
+.NewUser input:last-of-type:hover {
+    background-color: rgb(113, 124, 10) !important;
+}
+
+.FormInfo {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 25pt;
+    color: rgb(243, 147, 21);
+}
+
+.SelfPage {
+    border: 5px solid rgb(94, 94, 94);
+    background-color: rgb(121, 121, 121);
+    width: 600px;
+    height: 720px;
+    margin: 30px;
+    font-size: 24pt;
+    color: white;
+    display: inline-block;
+}
+
+.SelfPage p {
+    padding-top: 8px;
+    padding-left: 24px;
+    text-align: left;
+    padding-bottom: 8px;
+}
+
+.ToMain input {
+    background-color: #4CAF50 !important;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.ProductsList {
+    border: 5px solid rgb(94, 94, 94);
+    background-color: rgb(121, 121, 121);
+    width: 1250px;
+    height: 3000px;
+    margin: 30px;
+    font-size: 24pt;
+    color: white;
+    display: inline-block;
+}
+
+.ProductsList li {
+    padding-top: 8px;
+    padding-left: 24px;
+    text-align: left;
+    padding-bottom: 12px;
+}
+
+.ProductsList li input {
+    background-color: #4CAF50 !important;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.ProductInfo {
+    border: 5px solid rgb(94, 94, 94);
+    background-color: rgb(121, 121, 121);
+    width: 400px;
+    height: 750px;
+    margin: 30px;
+    color: white;
+    display: inline-block;
+}
+
+.ProductInfo input {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.ProductInfo input:hover {
+    background-color: rgb(53, 126, 56); 
+}
+
+.ProductInfo input:last-of-type {
+    background-color: rgb(151, 167, 7) !important;
+}
+
+.ProductInfo input:last-of-type:hover {
+    background-color: rgb(113, 124, 10) !important;
+}
+
+.ToMain input:hover {
+    background-color: rgb(53, 126, 56) !important; 
+}
 /*---Список-товаров-начало---*/
 
 .Product {
@@ -172,6 +315,11 @@ header {
 
 .ProductPrice {
     font-size: 18pt;
+}
+
+.NoImage {
+    padding-top: 90px;
+    padding-bottom: 80px;
 }
 
 .ProductAmount {
