@@ -1,2 +1,2 @@
 # OnlineShop
-[Ссылка](http://karelia.mati.su/PHP_LABS/ "Magazin4ik") на сайт.
+[Ссылка](http://karelia.mati.su/magazin4ik/ "Magazin4ik") на сайт.
