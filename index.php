@@ -1,12 +1,14 @@
 <?php
 
+/* Пароль для admin: 1234567890Ab */
+
 include_once 'OnlineShop.php';
 
 $host = "localhost";
-$dataBaseName = "enter your data base name";
+$dataBaseName = "karelia_online_shop";
 $charset = "utf8";
-$user = "enter your username";
-$password = "enter your password";
+$user = "karelia";
+$password = "12345Ab";
 
 $dsn = "mysql:host=$host;dbname=$dataBaseName;charset=$charset;";
 
@@ -226,6 +228,52 @@ elseif (isset($_POST['exit'])) {
     session_destroy();
     $magazin4ik->printMainPanel();
     $magazin4ik->showGoodsList();
+}
+elseif (isset($_POST['removeFilesPressed'])) {
+    $dir = "uploads/";
+    if (isset($_POST["file"])) {
+        foreach ($_POST["file"] as $value) {
+            unlink($dir.$value);
+            echo '
+            <p class = "UploadMessage">Файл '.$value.' удален.</p>
+            ';
+        }
+    }
+    $magazin4ik->showSelfPage();
+}
+elseif (isset($_POST['uploadPressed'])) {
+    $dir = "uploads/";
+    foreach ($_FILES["pictures"]["error"] as $key => $error) {
+        if ($error == UPLOAD_ERR_OK) {
+            if (file_exists($dir . $_FILES["pictures"]["name"][$key])) {
+                echo '
+                <p class = "loginError">Файл '. $_FILES["pictures"]["name"][$key] . ' уже у нас есть! Загрузка не была произведена.</p>
+                ';
+            }
+            elseif ($_FILES["pictures"]["size"][$key] > 500000000000) {
+                echo '
+                <p class = "loginError">Файл '. $_FILES["pictures"]["name"][$key] . ' слишком большой! Загрузка не была произведена.</p>
+                ';
+            }
+            elseif (($_FILES["pictures"]["type"][$key] !== "image/jpeg") && ($_FILES["pictures"]["type"][$key] !== "image/png") && ($_FILES["pictures"]["type"][$key] !== "image/pjpeg")) {
+                echo '
+                <p class = "loginError">Файл '. $_FILES["pictures"]["name"][$key] . ' не является изображением типа png или jpeg! Загрузка не была произведена.</p>
+                ';
+            }
+            else {
+                if (move_uploaded_file($_FILES["pictures"]["tmp_name"][$key], $dir . $_FILES["pictures"]["name"][$key])) {
+                    echo '
+                    <p class = "UploadMessage">Файл '. $_FILES["pictures"]["name"][$key] . ' сохранен.</p>
+                    ';
+                } else {
+                    echo '
+                    <p class = "loginError">Загрузка файла '. $_FILES["pictures"]["name"][$key] . ' не была произведена по причине ошибки со стороны сервера.</p>
+                    ';
+                }
+            }
+        }
+    }
+    $magazin4ik->showSelfPage();
 }
 elseif (isset($_POST['adminHere'])) {
     $magazin4ik->showAdminPanel($dsn, $user, $password, $options);

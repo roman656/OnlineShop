@@ -302,7 +302,7 @@ class OnlineShop {
                     <p>Email: '.($this->users[$_SESSION['email']])->getEmail().'</p>
                     <p>Телефон: '.($this->users[$_SESSION['email']])->getPhone().'</p>
                     <p>Дата рождения: '.str_replace('.', '-', ($this->users[$_SESSION['email']])->getBirthdate()).'</p>
-                    <p>IP адресс: '.($this->users[$_SESSION['email']])->getInternetProtocolAddress().'</p>
+                    <p>IP-адрес: '.($this->users[$_SESSION['email']])->getInternetProtocolAddress().'</p>
                     <p>Личный сайт: '.($this->users[$_SESSION['email']])->getWebsite().'</p>
                     <p>Статус: '.(($this->users[$_SESSION['email']])->getLevel() == 0 ? 'Администратор' : 'Расход').'</p>
         ';
@@ -335,6 +335,96 @@ class OnlineShop {
             }
         }
         echo '
+                    <p>Загрузка изображений:</p>
+                    <form class="Upload" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="pictures[]" accept=".jpg, .jpeg, .png" multiple required>
+                        <input type="submit" name = "uploadPressed" value="Загрузить">
+                    </form>
+                    <p>Изображения на сервере:</p>
+                    <form class="ShowFiles" method="POST">
+        ';
+        $dir = "uploads/";
+        $hasFilesToShow = false;
+        if (is_dir($dir)) {
+            if ($dh = opendir($dir)) {
+                while ($file = readdir($dh)) {
+                    if (filetype($dir . $file) !== "dir") {
+                        echo '
+                        <p><input type="checkbox" name="file[]" value="'.$file.'">'.$file.'</p>
+                        ';
+                        $hasFilesToShow = true;
+                    }
+                }
+                closedir($dh);
+            }
+        }
+        if ($hasFilesToShow) {
+            echo '
+                        <input type="submit" name = "removeFilesPressed" value="Удалить">
+            ';
+        }
+
+        $values = [4, 2, 3, 5, 1, 3, 4, 5, 6, 2, 3, 5];
+
+        $colors = ["silver", "cyan", "purple",
+                   "red", "olive","lime",
+                   "yellow", "green", "blue",
+                   "orange", "teal", "navy"];
+
+        $months = ["Янв", "Фев", "Мар",
+                   "Апр", "Май", "Июн",
+                   "Июл", "Авг", "Сен",
+                   "Окт", "Ноя", "Дек"];
+
+        $width = 550;
+        $height = 400;
+        $column_width = 20;
+        $default_indent = 20;
+        $column_horizontal_indent = $default_indent + $column_width;
+        $text_indent = 5;
+
+        $point_values = [3,2,1,0];
+
+        $j = 0;
+        for ($i = count($point_values) - 1; $i >= 0; $i--) {
+            $point_values[$j] = round(max($values) / (count($point_values) - 1) * $i, 2);
+            $j++;
+        }
+
+        echo '
+                    </form>
+                    <p>Диаграмма:</p>
+                    <svg width='.$width.'px height='.$height.'px>
+                        <line x1="'.$default_indent.'" y1="'.($default_indent * 2).'" x2="'.$default_indent.'" y2="'.($height - $default_indent).'" stroke-width="1" stroke="rgb(0,0,0)"/>
+        ';
+
+        for ($i = 0; $i < count($point_values); $i++) {
+            echo '
+                        <text style="fill: white; font-size: 16px;" x="0" y="'.(($height - $default_indent) / count($point_values) * ($i + 1)).'">'.$point_values[$i].'</text>
+                        <line x1="'.$default_indent.'" y1="'.(($height - $default_indent) / count($point_values) * ($i + 1)).'" x2="'.$width.'" y2="'.(($height - $default_indent) / count($point_values) * ($i + 1)).'" stroke-width="1" stroke="rgb(0,0,0)"/>
+            ';
+        }
+
+        for ($i = 0; $i < count($values); $i++) {
+            echo '
+                        <text style="fill: white; font-size: 16px;" x="'.($text_indent + $column_horizontal_indent + $i * ($column_width + (($i > 0) ? $column_width : 0))).'" y="'.(-$text_indent + ($height - $default_indent) - ($height - $default_indent - (($height - $default_indent) / count($point_values))) / max($values) * $values[$i]).'">'.$values[$i].'</text>
+                        <rect x="'.($column_horizontal_indent + $i * ($column_width + (($i > 0) ? $column_width : 0))).'" y="'.(($height - $default_indent) - ($height - $default_indent - (($height - $default_indent) / count($point_values))) / max($values) * $values[$i]).'" width="'.$column_width.'" height="'.(($height - $default_indent - (($height - $default_indent) / count($point_values))) / max($values) * $values[$i]).'" fill="'.$colors[$i].'"/>
+            ';
+        }
+        
+        echo '
+                    </svg>
+                        <div class="Legend">
+        ';
+
+        for ($i = 0; $i < count($months); $i++) {
+            echo '
+                            <p class="DiagramText" x="'.($column_horizontal_indent + $i * ($column_width + (($i > 0) ? $column_width : 0))).'" y="'.$height.'">'.$months[$i].'</p>
+            ';
+        }
+
+        echo '
+                    </div>
                 </div>
         ';
     }
@@ -500,7 +590,7 @@ class OnlineShop {
                             </td>
                             <td>
                                 <ul>
-                                    <li><a href="http://faizovr.mati.su/">Сайт Рустама</a></li>
+                                    <li><a href="http://db1.mati.su/">Сайт Ильи</a></li>
                                 </ul>
                             </td>
                             <td>

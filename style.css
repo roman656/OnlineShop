@@ -152,6 +152,12 @@ header {
     font-size: 22px;
 }
 
+.UploadMessage {
+    color: white;
+    padding: 15px 20px;
+    font-size: 22px;
+}
+
 .NewUser {
     border: 5px solid rgb(94, 94, 94);
     background-color: rgb(121, 121, 121);
@@ -203,7 +209,7 @@ header {
     border: 5px solid rgb(94, 94, 94);
     background-color: rgb(121, 121, 121);
     width: 600px;
-    height: 720px;
+    height: 1320px;
     margin: 30px;
     font-size: 24pt;
     color: white;
@@ -218,6 +224,30 @@ header {
 }
 
 .ToMain input {
+    background-color: #4CAF50 !important;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.Upload input {
+    background-color: #4CAF50 !important;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.ShowFiles input {
     background-color: #4CAF50 !important;
     border: none;
     color: white;
@@ -295,6 +325,14 @@ header {
 
 .ToMain input:hover {
     background-color: rgb(53, 126, 56) !important; 
+}
+
+.Upload input:hover {
+    background-color: rgb(53, 126, 56) !important;
+}
+
+.ShowFiles input:hover {
+    background-color: rgb(53, 126, 56) !important;
 }
 /*---Список-товаров-начало---*/
 
@@ -547,3 +585,15 @@ footer a:hover {
 }
 
 /*---Подвал-конец---*/
+
+.Legend {
+    margin: -40px 0px 0px 0px;
+}
+
+.DiagramText {
+    color: white;
+    display: inline-block;
+    font-size: 16px;
+    width: 7px;
+    transform: rotate(90deg);
+}
